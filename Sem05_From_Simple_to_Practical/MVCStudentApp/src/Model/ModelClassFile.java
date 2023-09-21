@@ -16,53 +16,56 @@ public class ModelClassFile implements iGetModel {
     public ModelClassFile(String fileName) {
         this.fileName = fileName;
 
-        try(FileWriter fw = new FileWriter(fileName, true))
-        {
-            fw.flush();    
+        try (FileWriter fw = new FileWriter(fileName, true)) {
+            fw.flush();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-   // @Override
+    // @Override
     public List<Student> getStudents() {
-        List<Student> students  = new ArrayList<Student>();
-        try
-        {
+        List<Student> students = new ArrayList<Student>();
+        try {
             File file = new File(fileName);
             FileReader fr = new FileReader(file);
             BufferedReader reader = new BufferedReader(fr);
             String line = reader.readLine();
-            while(line!=null)
-            {
+            while (line != null) {
                 String[] param = line.split(" ");
                 Student pers = new Student(param[0], Integer.parseInt(param[1]));
                 students.add(pers);
                 line = reader.readLine();
             }
 
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
         return students;
     }
 
-    public void saveAllStudentToFile(List<Student> students)
-    {
-        try(FileWriter fw = new FileWriter(fileName, true))
-        {
-            for(Student pers : students)
-            {
-                fw.write(pers.getName()+" "+pers.getAge()+" "+pers.getId());
+    public void saveAllStudentToFile(List<Student> students) {
+        try (FileWriter fw = new FileWriter(fileName, true)) {
+            for (Student pers : students) {
+                fw.write(pers.getName() + " " + pers.getAge() + " " + pers.getId());
                 fw.append('\n');
             }
-            fw.flush();    
+            fw.flush();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-    
+
+    /**
+     * Удаляет студента из списка
+     * 
+     * @param index индекс студента
+     */
+    @Override
+    public void removeStudents(int index) {
+        List<Student> students = getStudents();
+        students.remove(index);
+
+    }
 }

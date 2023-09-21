@@ -8,6 +8,7 @@ import Model.ModelClassFile;
 import Model.ModelClassList;
 import Model.Core.Student;
 import View.ViewClass;
+import View.ViewClassEng;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -18,7 +19,7 @@ public class App {
         Student s3 = new Student("Иван", 23);
         Student s4 = new Student("Дарья", 24);
         Student s5 = new Student("Света", 22);
-        Student s6 = new Student("Игорь", 21);
+        Student s6 = new Student("list", 21);
         Student s7 = new Student("Мария", 21);
         students.add(s1);
         students.add(s2);
@@ -28,12 +29,12 @@ public class App {
         students.add(s6);
         students.add(s7);
 
-        ModelClassFile fModel = new ModelClassFile("StudentDB.csv");
+        // ModelClassFile fModel = new ModelClassFile("StudentDB.csv");
 
         // ModelClassList modelList = new ModelClassList(students);
         // ViewClass view = new ViewClass();
-         iGetModel modelList = fModel; //new ModelClassList(students);
-         iGetView view = new ViewClass(); 
+        iGetModel modelList = new ModelClassList(students);
+        iGetView view = new ViewClassEng(); 
         
 
         ControllerClass controller = new ControllerClass(modelList, view);
@@ -41,6 +42,7 @@ public class App {
         // controller.update();
         
         controller.run();
+
      
 
 

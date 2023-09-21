@@ -17,4 +17,14 @@ public class ModelClassList implements iGetModel {
         return students;
     }
 
+    /**
+     * Удаляет студента из списка
+     * 
+     * @param index индекс студента
+     */
+    @Override
+    public void removeStudents(int index) {
+        this.students.remove(index);
+    }
+
 }

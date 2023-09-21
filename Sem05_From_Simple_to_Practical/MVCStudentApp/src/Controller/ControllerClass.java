@@ -2,6 +2,7 @@ package Controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import Controller.Interfaces.iGetModel;
 import Controller.Interfaces.iGetView;
@@ -19,6 +20,12 @@ public class ControllerClass {
         this.view = view;
     }
 
+    /**
+     * Проверка списка студентов
+     * 
+     * @param studs список студентов
+     * @return
+     */
     private boolean testData(List<Student> studs) {
 
         if (studs.size() > 0) {
@@ -40,7 +47,7 @@ public class ControllerClass {
 
             view.printAllStudent(model.getStudents());
         } else {
-            System.out.println("Список пуст");
+            System.out.println("List Empty");
         }
 
         // MVC
@@ -48,21 +55,36 @@ public class ControllerClass {
 
     }
 
+    /**
+     * захват с экрана
+     */
+    Scanner scan = new Scanner(System.in);
+
     public void run() {
 
         Command com = Command.NONE;
         boolean getNewIter = true;
         while (getNewIter) {
-            String command = view.prompt("Введите команды");
+            String command = view.prompt("Enter commad LIST DELETE EXIT");
             com = Command.valueOf(command.toUpperCase());
             switch (com) {
                 case EXIT:
                     getNewIter = false;
-                    System.out.println("Выход из программы");
+                    System.out.println("Exit Program");
                     break;
                 case LIST:
                     view.printAllStudent(model.getStudents());
                     break;
+                /**
+                 * Добавил кнопку delete
+                 */
+                case DELETE:
+                    System.out.println("Enter Id for Delete");
+                    int idDelete = scan.nextInt();
+                    model.removeStudents(idDelete);
+                    System.out.println("Delete id " + idDelete);
+                    break;
+
             }
 
         }
